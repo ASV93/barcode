@@ -102,8 +102,9 @@ class DNS2D {
         $repstr = array("\0" => '', '&' => '&amp;', '<' => '&lt;', '>' => '&gt;');
         $svg = '<' . '?' . 'xml version="1.0" standalone="no"' . '?' . '>' . "\n";
         $svg .= '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">' . "\n";
-        $svg .= '<svg width="' . round(($this->barcode_array['num_cols'] * $w), 3) . '" height="' . round(($this->barcode_array['num_rows'] * $h), 3) . '" version="1.1" xmlns="http://www.w3.org/2000/svg">' . "\n";
+        $svg .= '<svg width="' . round(($this->barcode_array['num_cols'] * $w), 3) . '" height="' . (round(($this->barcode_array['num_rows'] * $h), 3)+20) . '" version="1.1" xmlns="http://www.w3.org/2000/svg">' . "\n";
         $svg .= "\t" . '<desc>' . strtr($this->barcode_array['code'], $repstr) . '</desc>' . "\n";
+        $svg .= "\t" . '<g><text x="50%" y="6%" style="font-size: 10px; font-family: sans-serif;" text-anchor="middle">' . env('QRCODE_TITLE','') . '</text></g>' . "\n";
         $svg .= "\t" . '<g id="elements" fill="' . $color . '" stroke="none">' . "\n";
         // print barcode elements
         $y = 0;
@@ -114,13 +115,15 @@ class DNS2D {
             for ($c = 0; $c < $this->barcode_array['num_cols']; ++$c) {
                 if ($this->barcode_array['bcode'][$r][$c] == 1) {
                     // draw a single barcode cell
-                    $svg .= "\t\t" . '<rect x="' . $x . '" y="' . $y . '" width="' . $w . '" height="' . $h . '" />' . "\n";
+                    $svg .= "\t\t" . '<rect x="' . $x . '" y="' . ($y+10) . '" width="' . $w . '" height="' . $h . '" />' . "\n";
                 }
                 $x += $w;
             }
             $y += $h;
         }
+        $arr = explode("/",$code);
         $svg .= "\t" . '</g>' . "\n";
+        $svg .= '<g><text x="50%" y="100%" style="font-size: 10px; font-family: sans-serif;" text-anchor="middle">ID: ' . $arr[count($arr)-1] . '</text></g>' . "\n";
         $svg .= '</svg>' . "\n";
         return $svg;
     }
