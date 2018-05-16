@@ -104,7 +104,7 @@ class DNS2D {
         $svg .= '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">' . "\n";
         $svg .= '<svg width="' . round(($this->barcode_array['num_cols'] * $w), 3) . '" height="' . (round(($this->barcode_array['num_rows'] * $h), 3)+22) . '" version="1.1" xmlns="http://www.w3.org/2000/svg">' . "\n";
         $svg .= "\t" . '<desc>' . strtr($this->barcode_array['code'], $repstr) . '</desc>' . "\n";
-        $svg .= "\t" . '<g><text x="50%" y="6%" style="font-size: 10px; font-family: sans-serif;" text-anchor="middle">' . $title ? $title : env('QRCODE_TITLE','') . '</text></g>' . "\n";
+        $svg .= "\t" . '<g><text x="50%" y="6%" style="font-size: 10px; font-family: sans-serif;" text-anchor="middle">' . ($title ? $title : env('QRCODE_TITLE','')) . '</text></g>' . "\n";
         $svg .= "\t" . '<g id="elements" fill="' . $color . '" stroke="none">' . "\n";
         // print barcode elements
         $y = 0;
