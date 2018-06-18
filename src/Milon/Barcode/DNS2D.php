@@ -123,7 +123,7 @@ class DNS2D {
         }
         $arr = explode("/",$code);
         $svg .= "\t" . '</g>' . "\n";
-        $svg .= '<g><text x="50%" y="100%" style="font-size: 10px; font-family: sans-serif;" text-anchor="middle">ID: ' . $arr[count($arr)-1] . '</text></g>' . "\n";
+        $svg .= '<g><text x="50%" y="100%" style="font-size: 10px; font-family: sans-serif;" text-anchor="middle">' . $arr[count($arr)-1] . '</text></g>' . "\n";
         $svg .= '</svg>' . "\n";
         return $svg;
     }
